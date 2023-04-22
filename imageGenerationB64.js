@@ -1,7 +1,6 @@
-const API_KEY = '';
-
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
+    // https://developers.cloudflare.com/workers/platform/environment-variables/#environment-variables-via-the-dashboard
     if (request.method !== 'POST') {
       return new Response('Only POST method is supported.');
     }
@@ -17,7 +16,7 @@ export default {
       method: 'POST',
       headers: [
         ['Content-Type', 'application/json'],
-        ['Authorization', 'Bearer ' + API_KEY],
+        ['Authorization', 'Bearer ' + env.API_KEY],
       ],
       body: JSON.stringify({
         prompt,
